@@ -955,7 +955,23 @@ static void Keyboard(bool down, unsigned keycode,
 {
 	/* Keyboard Input */
 	keyboardDown = down;
-	keyboardChange = true; 
+	keyboardChange = true;
+#ifdef ATARI_GSG
+	switch (keycode)
+	{
+		case 256: keyboardState = keypadStates[10]; break; // 0
+		case 257: keyboardState = keypadStates[0]; break; // 1
+		case 258: keyboardState = keypadStates[1]; break; // 2
+		case 259: keyboardState = keypadStates[2]; break; // 3
+		case 260: keyboardState = keypadStates[3]; break; // 4
+		case 261: keyboardState = keypadStates[4]; break; // 5
+		case 262: keyboardState = keypadStates[5]; break; // 6
+		case 263: keyboardState = keypadStates[6]; break; // 7
+		case 264: keyboardState = keypadStates[7]; break; // 8
+		case 265: keyboardState = keypadStates[8]; break; // 9
+		case 57: keyboardState = keypadStates[9]; break; // C [
+		case 48: keyboardState = keypadStates[11]; break; // E ]
+#else
 	switch (character)
 	{
 		case 48: keyboardState = keypadStates[10]; break; // 0
@@ -970,6 +986,7 @@ static void Keyboard(bool down, unsigned keycode,
 		case 57: keyboardState = keypadStates[8]; break; // 9
 		case 91: keyboardState = keypadStates[9]; break; // C [
 		case 93: keyboardState = keypadStates[11]; break; // E ]
+#endif
 		default: 
 			keyboardChange = false;
 			keyboardDown = false;
